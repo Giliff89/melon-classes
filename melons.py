@@ -57,3 +57,11 @@ class InternationalMelonOrder(AbstractMelonOrder):
         if self.qty < 10:
             total += 3
         return total
+
+
+class GovernmentMelonOrder(AbstractMelonOrder):
+    """Order specs for government personnel."""
+
+    def __init__(self, species, qty):
+        """Properties of AbstractMelonOrder plus GovernmentMelonOrder."""
+        super(GovernmentMelonOrder, self).__init__(species, qty, "government", tax=0)
