@@ -19,8 +19,6 @@ class AbstractMelonOrder(object):
 
         if self.species == "Christmas melon":
             base_price = 7.5
-        # elif order_type == "international" and self.qty < 10:
-        #     total += 3
         else:
             base_price = 5
         total = (1 + self.tax) * self.qty * base_price
@@ -52,64 +50,10 @@ class InternationalMelonOrder(AbstractMelonOrder):
 
         return self.country_code
 
-    # def fee_under_10(self):
-    #     if self.qty < 10:
-    #         return self.get_total() + 3
-    #     else:
-    #         pass
+    def get_total(self):
+        """Calculate price."""
 
-
-# class DomesticMelonOrder(AbstractMelonOrder):
-#     """A domestic (in the US) melon order."""
-
-#     def __init__(self, species, qty):
-#         """Initialize melon order attributes"""
-
-#         self.species = species
-#         self.qty = qty
-#         self.shipped = False
-#         self.order_type = "domestic"
-#         self.tax = 0.08
-
-#     def get_total(self):
-#         """Calculate price."""
-
-#         base_price = 5
-#         total = (1 + self.tax) * self.qty * base_price
-#         return total
-
-#     def mark_shipped(self):
-#         """Set shipped to true."""
-
-#         self.shipped = True
-
-
-# class InternationalMelonOrder(AbstractMelonOrder):
-#     """An international (non-US) melon order."""
-
-#     def __init__(self, species, qty, country_code):
-#         """Initialize melon order attributes"""
-
-#         self.species = species
-#         self.qty = qty
-#         self.country_code = country_code
-#         self.shipped = False
-#         self.order_type = "international"
-#         self.tax = 0.17
-
-#     def get_total(self):
-#         """Calculate price."""
-
-#         base_price = 5
-#         total = (1 + self.tax) * self.qty * base_price
-#         return total
-
-#     def mark_shipped(self):
-#         """Set shipped to true."""
-
-#         self.shipped = True
-
-#     def get_country_code(self):
-#         """Return the country code."""
-
-#         return self.country_code
+        total = super(InternationalMelonOrder, self).get_total()
+        if self.qty < 10:
+            total += 3
+        return total
